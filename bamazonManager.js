@@ -211,4 +211,5 @@ function addProduct() {
 //EXIT=====================================
 function exit() {
     connection.end();
+    console.log("GoodBye.");
 }

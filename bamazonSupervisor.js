@@ -7,11 +7,8 @@ var Table = require("cli-table");
 var chalk = require("chalk")
 //MySQL
 var mysql = require("mysql");
-//Figlet
-var figlet = require("figlet");
 //dotenv
 require("dotenv").config();
-
 
 //CONNECTION================================================
 var connection = mysql.createConnection({
@@ -61,7 +58,6 @@ function menuOptionsSup() {
         })
 }
 //SALES BY DEPARTMENT=========================================
-//GROUP BY department_name ORDER BY department_id - include alias total sales
 function departmentSales() {
     connection.query("SELECT departments.department_id, departments.department_name, departments.overhead_costs, SUM(products.product_sales) AS total_products_sales, SUM(products.product_sales) - overhead_costs AS difference FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_name, department_id, overhead_costs", function (err, res) {
         console.log(err);
@@ -72,9 +68,10 @@ function departmentSales() {
         })
         //Loop through table columns and push to table
         for (var i = 0; i < res.length; i++) {
-            table.push([res[i].department_id, res[i].department_name, "$" + res[i].overhead_costs, "$" + res[i].total_products_sales.toFixed(2), res[i].difference])
+            table.push([res[i].department_id, res[i].department_name, "$" + res[i].overhead_costs.toFixed(2), "$" + res[i].total_products_sales.toFixed(2), "$" + res[i].difference])
         }
         console.log(table.toString());
+        menuOptionsSup();
     })
 }
 
@@ -112,9 +109,3 @@ function exit(){
     connection.end();
     console.log("GoodBye.");
 }
-
-// SELECT departments.department_id, departments.department_name, departments.overhead_costs, SUM(products.product_sales) AS total_products_sales,
-// SUM(products.product_sales) - overhead_costs AS difference
-// FROM departments
-// INNER JOIN products ON departments.department_name = products.department_name
-// GROUP BY department_name, department_id, overhead_costs;
