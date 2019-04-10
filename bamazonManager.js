@@ -65,7 +65,7 @@ function menuOptions() {
 
 //ALL PRODUCTS FOR SALE================================
 function displayAll() {
-    //Select table
+    // Select table
     connection.query("SELECT * FROM products", function (err, res) {
         //Set up table column headings and widths
         var table = new Table({
@@ -98,21 +98,7 @@ function displayInventory() {
 }
 
 //ADD TO INVENTORY======================================
-
-var addInventory = function () {
-    // connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, res) {
-    //     //Set up table column headings and widths
-    //     var table = new Table({
-    //         head: ["ID", "Product", "Department", "Price", "Quanity"],
-    //         colwidths: [10, 25, 25, 10, 14]
-    //     })
-    //     //Loop through table columns and push to table
-    //     for (var i = 0; i < res.length; i++) {
-    //         table.push([res[i].item_id, res[i].product_name, res[i].department_name, "$" + parseFloat(res[i].price).toFixed(2), res[i].stock_quantity])
-    //     }
-    //     console.log(table.toString());
-    // })
-
+function addInventory() {
     inquirer.prompt([
         {
             name: "addID",
@@ -123,10 +109,10 @@ var addInventory = function () {
             name: "addQ",
             type: "input",
             message: "How much would you like to add to the stock quantity?",
-            validate: function(value){
+            validate: function (value) {
                 if (!isNaN(value)) {
                     return true;
-                } 
+                }
                 else {
                     console.log(chalk.red("Please enter a number."));
                     return false;
@@ -134,41 +120,30 @@ var addInventory = function () {
             }
         }
     ]).then(function (response) {
-
         // Pushes new stock to database.
         connection.query("SELECT * FROM products", function (err, res) {
-
             var chosenItem;
-           
             // Gets product who's stock needs to be updated.
             for (var i = 0; i < res.length; i++) {
                 if (res[i].item_id === parseInt(response.addID)) {
                     chosenItem = res[i];
                 }
             }
-
-            // Adds new stock  to existing stock.
+            // Adds new stock to existing stock.
             var updatedStock = parseInt(chosenItem.stock_quantity) + parseInt(response.addQ);
-
-            console.log(chalk.magenta("\nYour stock, " + res[0].product_name.toUpperCase() + ", is restocked\n"));
-
+            console.log(chalk.magenta("\nYour item is restocked.\n"));
             // Updates stock for selected product in database.
             connection.query("UPDATE products SET ? WHERE ?", [{
                 stock_quantity: updatedStock
             }, {
                 item_id: response.addID
             }], function (err, res) {
-                if (err) {
-                    throw err;
-                } else {
-
-                    // Lets manager select new action.
+                if (err) throw err;
+                else {
                     menuOptions();
                 }
             });
-
         });
-
     });
 };
 
@@ -190,21 +165,30 @@ function addProduct() {
         {
             type: "input",
             name: "price",
-            message: "What is the price of the product?",//validate
+            message: "What is the price of the product?",
+            validate: function (value) {
+                if (!isNaN(value)) {
+                    return true;
+                }
+                else {
+                    console.log(chalk.red("Please enter a number."));
+                    return false;
+                }
+            }
         },
         {
             type: "input",
             name: "quantity",
-            message: "How much quantity would you like to add?", //validate
-            // validate: function (value) {
-            //     if (!isNaN(value)) {
-            //         return true;
-            //     }
-            //     else {
-            //         console.log(chalk.red("Please enter a number."));
-            //         return false;
-            //     }
-            // }
+            message: "How much quantity would you like to add?",
+            validate: function (value) {
+                if (!isNaN(value)) {
+                    return true;
+                }
+                else {
+                    console.log(chalk.red("Please enter a number."));
+                    return false;
+                }
+            }
         }
     ])
         .then(function (response) {
