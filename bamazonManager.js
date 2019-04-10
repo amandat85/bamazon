@@ -150,7 +150,7 @@ var addInventory = function () {
             // Adds new stock  to existing stock.
             var updatedStock = parseInt(chosenItem.stock_quantity) + parseInt(response.addQ);
 
-            console.log(chalk.magenta("Your stock, " + res[0].product_name.toUpperCase() + ", is restocked"));
+            console.log(chalk.magenta("\nYour stock, " + res[0].product_name.toUpperCase() + ", is restocked\n"));
 
             // Updates stock for selected product in database.
             connection.query("UPDATE products SET ? WHERE ?", [{

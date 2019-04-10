@@ -24,7 +24,7 @@ VALUES
     ("PopStart French Horn Mute Non-Transposing", "Mutes", 260.00, 25),
     ("Straight Mute for Trumpet/Cornet", "Mutes", 60.00, 75),
     ("Plunger Mute for Trombones", "Mutes", 80.00, 2),
-    ("harmon Trumpet Wow Wow Mute", "Mutes", 58.99, 22),
+    ("Harmon Trumpet Wow Wow Mute", "Mutes", 58.99, 22),
     ("Harmon Trombone Wow Wow Mute", "Mutes", 93.50, 4),
     ("Carlton Trumpet Mouthpiece 7C", "Mouthpieces", 32.99, 29),
     ("carlton Trombone Mouthpiece 12C", "Mouthpieces", 39.99, 28),

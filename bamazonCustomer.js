@@ -53,11 +53,11 @@ function displayAll() {
         //Set up table column headings and widths
         var table = new Table({
             head: ["ID", "Product", "Department", "Price", "Quanity"],//extra row is for testing
-            colwidths: [10, 25, 25, 10, 14, 14]
+            colwidths: [10, 25, 25, 10, 14]
         })
         //Loop through table columns and push to table
         for (var i = 0; i < res.length; i++) {
-            table.push([res[i].item_id, res[i].product_name, res[i].department_name, "$" + parseFloat(res[i].price).toFixed(2), res[i].stock_quantity, res[i].product_sales.toFixed(2)])
+            table.push([res[i].item_id, res[i].product_name, res[i].department_name, "$" + parseFloat(res[i].price).toFixed(2), res[i].stock_quantity])
         }
         console.log(table.toString());
         choice();
