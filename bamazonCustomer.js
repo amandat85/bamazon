@@ -5,33 +5,10 @@ var inquirer = require("inquirer");
 var Table = require("cli-table");
 //Chalk
 var chalk = require("chalk")
-//MySQL
-var mysql = require("mysql");
 //Figlet
 var figlet = require("figlet");
-//dotenv
-require("dotenv").config();
-
-//CONNECTION================================================
-var connection = mysql.createConnection({
-    host: "localhost",
-
-    // Port
-    port: 3306,
-
-    // Your username
-    user: "root",
-
-    // Your password
-    password: process.env.ROOT_PASSWORD,
-    database: "bamazon_db"
-});
-
-//Check connection
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-});
+//Connection.js
+var connection = require("./connection.js");
 
 //WElCOME===================================================
 figlet("The Rotary Valve", function (err, data) {
@@ -42,7 +19,6 @@ figlet("The Rotary Valve", function (err, data) {
     }
     console.log(data)
     console.log("A store for all your brass instrument needs");
-
     //Start
     displayAll();
 });
@@ -120,14 +96,16 @@ function order(itemID, amount) {
                     {
                         item_ID: itemID
                     }
-                ],
-            )
+                ],function (err, res){
+                    if (err) throw err;
+                })
             morePurchases();
         }
         else {
             console.log(chalk.cyan("\nInsufficient quantity, sorry we do not have enough " + res[0].product_name.toUpperCase() + " to complete your order.\n"));
             morePurchases();
         };
+    
 
     });
 };

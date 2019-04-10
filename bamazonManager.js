@@ -5,32 +5,10 @@ var inquirer = require("inquirer");
 var Table = require("cli-table");
 //Chalk
 var chalk = require("chalk")
-//MySQL
-var mysql = require("mysql");
-//dotenv
-require("dotenv").config();
+//Connection.js
+var connection = require("./connection.js");
 
-//CONNECTION================================================
-var connection = mysql.createConnection({
-    host: "localhost",
-
-    // Port
-    port: 3306,
-
-    // Your username
-    user: "root",
-
-    // Your password
-    password: process.env.ROOT_PASSWORD,
-    database: "bamazon_db"
-});
-
-//Check connection
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-    menuOptions();
-});
+menuOptions();
 
 //MENU OPTIONS===========================================
 function menuOptions() {

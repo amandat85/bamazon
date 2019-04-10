@@ -36,17 +36,13 @@ VALUES
     ("Marcus Bonna Cases French Horn Flight Case", "Cases", 799.00, 1),
     ("Bam Cases Classic Trombone Case", "Cases", 360.00, 2);
 
-UPDATE products SET product_sales = 40 WHERE item_id = 20;
-
     CREATE TABLE departments (
     department_id INT(2) NOT NULL AUTO_INCREMENT,
     department_name VARCHAR(100) NOT NULL,
     overhead_costs DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (department_id)
 );
-
-
-    
+ 
 INSERT INTO departments(department_name, overhead_costs)
 VALUES("Brass Accessories", 150000),
 ("Mutes", 100000),
@@ -54,15 +50,6 @@ VALUES("Brass Accessories", 150000),
 ("Cases", 1000000);
 
 ALTER TABLE products ADD COLUMN product_sales DOUBLE(10,2) DEFAULT 0.00 AFTER stock_quantity;
-
---This one works
--- SELECT departments.department_id, departments.department_name, departments.overhead_costs, SUM(products.product_sales) AS total_products_sales,
--- SUM(products.product_sales) - overhead_costs AS difference
--- FROM departments
--- INNER JOIN products ON departments.department_name = products.department_name
--- GROUP BY department_name, department_id, overhead_costs;
-
-
 
 SELECT * FROM products;
 SELECT * FROM departments;
