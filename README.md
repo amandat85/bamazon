@@ -50,7 +50,7 @@ View this video demo https://drive.google.com/file/d/1AxSOLF5WI0dmaj4S1GAP-xocvC
 2. As the manager, you will have a list of 4 items to choose from.
 3. `View Products for Sale`will display all items in the inventory available for purchase.
 4. `View Low Inventory` will display all items that have less than five (5) items in stock.
-5. `Add to Inventory` will allow the manager to add stock to the inventory by specifying the item ide of the product and the quantity to add to the stock.
+5. `Add to Inventory` will allow the manager to add stock to the inventory by specifying the item id of the product and the quantity to add to the stock.
 6. `Add New Product` will allow the manager to add a brand new product to the inventory by specifying the name of the item, the department the item belongs to, the cost of the item and the number of stock of the item.
 
 ## Challenge 3 - Supervisor
