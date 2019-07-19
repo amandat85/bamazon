@@ -4,6 +4,9 @@ An Amazon-like storefront with MySQL.
 ## Repository
 https://github.com/amandat85/bamazon
 
+## Homework Instructions
+[Homework Details](homework_instructions.md)
+
 ## Tools, Technology and Languages Used
 * Node.js
 * JavaScript
